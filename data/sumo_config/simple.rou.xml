@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Simple SUMO Routes: Vehicle definitions and flows -->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+
+    <!-- Vehicle Type Definitions -->
+    <vType id="car" accel="2.6" decel="4.5" sigma="0.5" length="5.0" minGap="2.5" maxSpeed="55.0" guiShape="passenger" color="1,1,0"/>
+    <vType id="bus" accel="1.2" decel="4.0" sigma="0.5" length="12.0" minGap="3.0" maxSpeed="40.0" guiShape="bus" color="0,1,1"/>
+    <vType id="truck" accel="1.0" decel="4.0" sigma="0.5" length="10.0" minGap="3.0" maxSpeed="45.0" guiShape="truck" color="1,0,0"/>
+    <vType id="motorcycle" accel="3.5" decel="5.0" sigma="0.3" length="2.5" minGap="2.0" maxSpeed="65.0" guiShape="motorcycle" color="1,0.5,0"/>
+
+    <!-- Route Definitions -->
+    
+    <!-- Route 1: Horizontal through road (E0 -> E4) -->
+    <route id="route_horizontal" edges="E0 E4"/>
+    
+    <!-- Route 2: Turn up at first junction (E0 -> E1 -> E2) -->
+    <route id="route_turn_up" edges="E0 E1 E2"/>
+    
+    <!-- Route 3: Long route (E0 -> E1 -> E2 -> E3) -->
+    <route id="route_long" edges="E0 E1 E2 E3"/>
+
+    <!-- Vehicle Flows -->
+    
+    <!-- Car flow on horizontal route -->
+    <flow id="flow_cars_horizontal" type="car" route="route_horizontal" 
+          begin="0" end="3600" probability="0.15" departLane="best" departSpeed="max"/>
+    
+    <!-- Car flow on turn up route -->
+    <flow id="flow_cars_turn" type="car" route="route_turn_up" 
+          begin="0" end="3600" probability="0.10" departLane="best" departSpeed="max"/>
+    
+    <!-- Bus flow on long route -->
+    <flow id="flow_buses" type="bus" route="route_long" 
+          begin="0" end="3600" probability="0.05" departLane="best" departSpeed="max"/>
+    
+    <!-- Truck flow on horizontal route -->
+    <flow id="flow_trucks" type="truck" route="route_horizontal" 
+          begin="0" end="3600" probability="0.08" departLane="best" departSpeed="max"/>
+    
+    <!-- Motorcycle flow on turn up route -->
+    <flow id="flow_motorcycles" type="motorcycle" route="route_turn_up" 
+          begin="0" end="3600" probability="0.12" departLane="best" departSpeed="max"/>
+
+    <!-- Individual vehicle departures for initial traffic -->
+    <vehicle id="car_0" type="car" route="route_horizontal" depart="0" departLane="0" departSpeed="10"/>
+    <vehicle id="car_1" type="car" route="route_turn_up" depart="2" departLane="1" departSpeed="12"/>
+    <vehicle id="bus_0" type="bus" route="route_long" depart="5" departLane="0" departSpeed="8"/>
+    <vehicle id="truck_0" type="truck" route="route_horizontal" depart="8" departLane="1" departSpeed="10"/>
+    <vehicle id="motorcycle_0" type="motorcycle" route="route_turn_up" depart="10" departLane="0" departSpeed="15"/>
+    <vehicle id="car_2" type="car" route="route_horizontal" depart="12" departLane="0" departSpeed="13"/>
+    <vehicle id="car_3" type="car" route="route_turn_up" depart="15" departLane="1" departSpeed="11"/>
+
+</routes>
